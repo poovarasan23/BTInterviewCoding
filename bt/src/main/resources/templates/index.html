@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Booking Service</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .content a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .content th a[href="login"] {
+            margin-left: 170px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h2>Welcome to Booking Service</h2>
+    <table>
+        <thead>
+        <tr>
+            <th><a href="signup">Register</a></th>
+            <th></th>
+            <th ><a href="login">Login</a></th>
+        </tr>
+        </thead>
+    </table>
+    <div th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+</body>
+</html>

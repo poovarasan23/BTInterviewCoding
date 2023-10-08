@@ -1,0 +1,81 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<h1 align="center">Welcome to the GuestbookEntry, <span th:text="${session.User}"></span>!</h1>
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .left-align {
+            float: left;
+        }
+        .right-align {
+            float: right;
+        }
+        }
+        .right-align {
+            float: right;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+<table>
+
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Status</th>
+        <th style="width: 300px;">Actions</th>
+    </tr>
+
+    <tbody>
+    <tr th:each="entry : ${entries}">
+        <td th:text="${entry.id}"></td>
+        <td th:text="${entry.name}"></td>
+        <td scope="row"> <img th:if="${entry.image != null and entry.image != ''}" th:src="'data:image/jpeg;base64,' + ${entry.image}" alt="Image" style="width: 100px;height: 100px;"> </td>
+        <td th:text="${entry.status}"></td>
+        <td>
+            <form th:action="@{/update}" method="get" th:object="${guestBookEntry}" style="display: inline-block;">
+                <input type="hidden" id="id1" name="id" th:value="${entry.id}"/>
+                <input type="hidden" id="name1" name="name" th:value="${entry.name}"/>
+                <input type="hidden" id="image1" name="image" th:value="${entry.image}"/>
+                <input type="hidden" id="status1" name="status" th:value="${entry.status}"/>
+                <button type="submit">Edit / Update</button>
+            </form>
+            <form th:action="@{/delete}" method="post" th:object="${guestBookEntry}" style="display: inline-block;">
+                <input type="hidden" id="id2" name="id" th:value="${entry.id}"/>
+                <input type="hidden" id="name2" name="name" th:value="${entry.name}"/>
+                <input type="hidden" id="image2" name="image" th:value="${entry.image}"/>
+                <input type="hidden" id="status2" name="status" th:value="${entry.status}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+
+<div th:if="${message}" class="alert alert-success">
+    <p th:text="${message}"></p>
+</div>
+
+
+<p class="left-align"><a href="/booking">Make New Entry</a></p>
+<p class="right-align" ><a href="/logout">Logout</a></p>
+</html>

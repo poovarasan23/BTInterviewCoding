@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<style>
+   button[type="submit"] {
+          background-color: #007bff;
+          color: #fff;
+          padding: 10px 20px;
+          border-radius: 3px;
+          cursor: pointer;
+          float: right;
+      }
+</style>
+<body>
+<form th:action="@{/update/data}" th:object="${guestBookEntry}" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="id" th:field="*{id}" />
+
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                border: 1px solid #ccc;
+            }
+
+            th, td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+        <title></title>
+    </head>
+    <table align="center">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Image URL</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td><span th:text="*{id}"></span></td>
+            <td><input type="text" id="name" th:field="*{name}" /></td>
+            <td>
+                <img th:field="*{image}" th:if="${image != null and image != ''}" th:src="'data:image/jpeg;base64,' + ${image}" alt="Image" style="width: 100px;height: 100px;">
+                <input type="file" accept="image/*" name="images"  id="images" class="form-control-file"/></td>
+            <td>
+                <select id="status" th:field="*{status}">
+                    <option value="PENDING" th:selected="${guestBookEntry.status == 'PENDING'}">Pending</option>
+                    <option value="APPROVED" th:selected="${guestBookEntry.status == 'APPROVED'}">Approved</option>
+                    <option value="REJECTED" th:selected="${guestBookEntry.status == 'REJECTED'}">Rejected</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

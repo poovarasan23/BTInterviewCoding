@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<h1 align="center">Welcome to the GuestbookEntry, <span th:text="${session.User}"></span>!</h1>
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <title></title>
+</head>
+
+<style>
+    .navbar {
+           text-align: center;
+       }
+
+       .navbar p {
+           display: inline;
+           margin: 300px;
+       }
+
+        .content a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .content th a[href="logout"] {
+            margin-left: 170px;
+        }
+</style>
+
+<body>
+    <table align="center">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Status</th>
+        </tr>
+        <tbody>
+        <tr th:each="entry : ${entries}">
+            <td th:text="${entry.id}"></td>
+            <td th:text="${entry.name}"></td>
+            <td scope="row"> <img th:if="${entry.image != null and entry.image != ''}" th:src="'data:image/jpeg;base64,' + ${entry.image}" alt="Image" style="width: 100px;height: 100px;"> </td>
+<!--            <span th:if="${entry.image == null or entry.image == ''}">N/A</span>-->
+            <td th:text="${entry.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+<br><br>
+
+<div class="navbar">
+    <p><a href="/booking">Make New Entry</a></p>
+    <p><a href="/logout">Logout</a></p>
+</div>
+
+</html>
