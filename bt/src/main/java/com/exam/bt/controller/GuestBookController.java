@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Properties;
 
 @Controller
 public class GuestBookController {
@@ -24,6 +25,7 @@ public class GuestBookController {
     public String addEntry(Model model) {
         model.addAttribute("guestBookEntry", new GuestBookEntry());
         return "add-entry";
+
     }
 
     @PostMapping("/new/entry/name")
