@@ -12,9 +12,9 @@ RUN mvn clean package -DskipTests
 
 RUN ls -l target
 
-COPY wait-for-db.sh /app/wait-for-db.sh
+COPY wait-for-db.sh /app/bt/wait-for-db.sh
 
-RUN chmod +x /app/wait-for-db.sh
+RUN chmod +x /app/bt/wait-for-db.sh
 
 EXPOSE 8080
 
