@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: TestDB
+      POSTGRES_USER: TestUser
+      POSTGERS_PASSWORD: TestPassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
   app:
     image: openjdk:17-jdk-slim
     container_name: bt-interview
@@ -16,16 +27,5 @@ services:
       - DB_PASSWORD=TestPassword
     depends_on:
       - db
-  db:
-    image: postgres:13
-    container_name: postgres-db
-    environment:
-      POSTGRES_DB: TestDB
-      POSTGRES_USER: TestUser
-      POSTGERS_PASSWORD: TestPassword
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
 volumes:
   db_data:
